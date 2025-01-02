@@ -24,7 +24,7 @@ public:
 template<class T, typename ...Arg>
 inline T& CEntityManager::CreateEntity(Arg&& ... args)
 {
-	static_assert(std::is_base_of<Entity, T>::value);
+	static_assert(std::is_base_of<CEntity, T>::value);
 	auto uObjPtr{ std::make_unique<T>(std::forward<Arg...>(args)) };
 	auto hashValue{typeid(T).hash_code()};
 	auto rawPtr = uObjPtr.get();
