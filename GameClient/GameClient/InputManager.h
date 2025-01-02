@@ -1,7 +1,7 @@
 #pragma once
 
 
-enum class KEY_TYPE : int32
+enum class KEY_TYPE : SHORT
 {
 	MLBUTTON = 0x01,
 	SPACE = 0x20,
@@ -30,7 +30,9 @@ enum class KEY_TYPE : int32
 	NUM8 = 0x38,
 	NUM9 = 0x39,
 };
-enum class KEY_STATE : uint8 { KEY_DOWN, KEY_PRESSED, KEY_UP, KEY_NONE };
+enum class KEY_STATE : uint8 { KEY_DOWN = 1, KEY_PRESSED, KEY_UP, KEY_NONE };
+
+class CInputManager;
 
 struct InputManagerDeleter
 {
@@ -41,7 +43,9 @@ class CInputManager : CSingleton<CInputManager,InputManagerDeleter>
 {
 	static uint8 _keyBuffer[constants::key_count];
 public:
-	static void UpdateKeyInput(const KEY_TYPE& key);
+	CInputManager() {}
+	~CInputManager() {}
+	static void UpdateKeyInput();
 	static void SetKeyInputState(const KEY_TYPE& key, const KEY_STATE& key_state);
 	static KEY_STATE GetKeyInputState(const KEY_TYPE& key);
 };
